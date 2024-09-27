@@ -27,7 +27,6 @@ def listen_and_detect(phone_number):
     microphone = sr.Microphone()
     with microphone as source:
         recognizer.adjust_for_ambient_noise(source)
-        print("Listening...")
         while True:
             try:
                 audio = recognizer.listen(source, timeout=None, phrase_time_limit=None)
@@ -110,7 +109,7 @@ class MainApp(QWidget):
 
     def initUI(self):
         # Font settings
-        font = QFont("Arial", 30)
+        font = QFont("Roboto", 30)
 
         # Create tabs
         self.tabs = QTabWidget()
@@ -257,10 +256,41 @@ class MainApp(QWidget):
             self.setDarkMode()
 
     def setLightMode(self):
-        self.setStyleSheet("background-color: white; color: black;")
-        self.theme_label.setText("Choose Theme:")
-        self.language_label.setText("Choose Language:")
-        self.set_background_image("C:/Users/Admin/Downloads/den-semi.jpg")  # Set the default background image
+        self.setStyleSheet("""
+            QWidget {
+                background-color: #FFF0F5;  /* Lightest pink */
+                color: black;
+            }
+            QTabWidget::pane { /* The tab widget frame */
+                background-color: #FFD1DA; /* Light soft pink */
+                border: 1px solid #FBA1B7;
+            }
+            QTabBar::tab {
+                background-color: #FFD1DA; /* Tab color */
+                color: black;
+                padding: 10px;
+            }
+            QTabBar::tab:selected {
+                background-color: #FBA1B7; /* Selected tab color */
+                color: white;
+            }
+            QPushButton {
+                background-color: #FFD1DA;
+                border: 2px solid #FBA1B7;
+                border-radius: 10px;
+                color: black;
+            }
+            QPushButton:hover {
+                background-color: #FBA1B7;
+                color: white;
+            }
+            QLabel {
+                color: #FBA1B7;  /* Text color similar to pink */
+            }
+        """)
+        self.set_background_image("C:/Users/Admin/Downloads/den-semi.jpg")  # Optionally, use a background image
+
+    # Set the default background image
 
     def setDarkMode(self):
         self.setStyleSheet("background-color: black; color: white;")
